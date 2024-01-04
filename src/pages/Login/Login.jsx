@@ -1,15 +1,19 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser, setCredentials } from "../../features/authSlice";
 import Button from "../../components/Button/Button";
 
 import styles from "./Login.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [rememberMe, setRememberMe] = useState(false);
 
+	const navigate = useNavigate();
+
+	const { token } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 
 	const handleLogin = () => {
@@ -20,9 +24,17 @@ const Login = () => {
 		const response = dispatch(loginUser(userCredentials));
 
 		if (response?.body?.token) {
+			console.log("HERE");
 			dispatch(setCredentials(response.body.token));
+			navigate("/user");
 		}
 	};
+
+	useEffect(() => {
+		if (token) {
+			navigate("/user");
+		}
+	}, [token, navigate]);
 
 	return (
 		<div className={styles.login}>
