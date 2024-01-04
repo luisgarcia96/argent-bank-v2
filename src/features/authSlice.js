@@ -10,7 +10,6 @@ export const loginUser = createAsyncThunk(
 	async (credentials, thunkAPI) => {
 		try {
 			const response = await login(credentials.email, credentials.password);
-			console.log("response", response);
 			return response;
 		} catch (error) {
 			console.log("error", error);
@@ -24,8 +23,8 @@ const authSlice = createSlice({
 	initialState,
 	reducers: {
 		setCredentials: (state, action) => {
-			const { accessToken } = action.payload;
-			state.token = accessToken;
+			const token = action.payload.body.token;
+			state.token = token;
 		},
 		logOut: (state) => {
 			state.token = null;
@@ -37,8 +36,8 @@ const authSlice = createSlice({
 				state.token = null;
 			})
 			.addCase(loginUser.fulfilled, (state, action) => {
-				const { accessToken } = action.payload;
-				state.token = accessToken;
+				const token = action.payload.body.token;
+				state.token = token;
 			})
 			.addCase(loginUser.rejected, (state) => {
 				state.token = null;

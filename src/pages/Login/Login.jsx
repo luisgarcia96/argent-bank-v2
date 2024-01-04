@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../features/authSlice";
+import { loginUser, setCredentials } from "../../features/authSlice";
 import Button from "../../components/Button/Button";
 
 import styles from "./Login.module.scss";
@@ -18,8 +18,9 @@ const Login = () => {
 			password,
 		};
 		const response = dispatch(loginUser(userCredentials));
-		if (response) {
-			localStorage.setItem("token", response?.body.token);
+
+		if (response?.body?.token) {
+			dispatch(setCredentials(response.body.token));
 		}
 	};
 
