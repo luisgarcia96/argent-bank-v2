@@ -1,0 +1,56 @@
+@use "../../styles/abstracts" as v;
+
+.login {
+	display: flex;
+	flex-direction: column;
+	min-height: calc(100vh - 10rem);
+	align-items: center;
+	background-color: v.$purple-dark;
+	padding-top: 3rem;
+
+	&__container {
+		box-sizing: border-box;
+		width: 18.75rem;
+		background-color: v.$white;
+		display: flex;
+		flex-direction: column;
+		padding: 2rem;
+		justify-content: center;
+		align-items: center;
+
+		.login__input {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 1rem;
+
+			label {
+				font-weight: v.$fw-bold;
+			}
+
+			input {
+				font-size: v.$fs-l;
+				padding: 5px;
+			}
+		}
+
+		.login__rememberMe {
+			width: 100%;
+			display: flex;
+			justify-content: start;
+
+			input {
+				margin-right: 0.25rem;
+			}
+
+			p {
+				margin: 0;
+				margin-left: 0.25rem;
+			}
+		}
+
+		.login__button {
+			margin-top: 1rem;
+		}
+	}
+}

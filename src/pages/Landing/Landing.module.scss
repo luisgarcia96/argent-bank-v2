@@ -1,0 +1,8 @@
+.landing {
+	min-height: calc(100vh - 7rem);
+
+	.features {
+		display: flex;
+		justify-content: space-around;
+	}
+}

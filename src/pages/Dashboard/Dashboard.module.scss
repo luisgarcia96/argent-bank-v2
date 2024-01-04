@@ -1,0 +1,48 @@
+@use "../../styles/abstracts" as v;
+
+.dashboard {
+    min-height: calc(100vh - 11rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    margin-bottom: auto;
+    gap: 2rem;
+    background-color: v.$purple-dark;
+
+    &__header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+
+
+        h1 {
+            color: v.$white;
+            font-size: v.$fs-xxl;
+            font-weight: v.$fw-bold;
+            margin: 0;
+            text-align: center;
+
+            //Make the br higher
+            br {
+                display: block;
+                content: "";
+                height: 0.5rem;
+            }
+        }
+
+        .editNameBtn {
+            width: fit-content;
+        }
+
+    }
+
+    &__accounts {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        width: 80%;
+        max-width: 70rem;
+    }
+}
