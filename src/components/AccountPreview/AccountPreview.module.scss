@@ -1,0 +1,27 @@
+@use "../../styles/abstracts/" as v;
+
+.accountPreview {
+    background-color: v.$white;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+
+    &__left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+        gap: 0.5rem;
+
+        .accountBalance {
+            font-size: v.$fs-xxxl;
+            font-weight: v.$fw-bold;
+        }
+    }
+
+    &__right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

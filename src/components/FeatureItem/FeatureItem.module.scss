@@ -1,0 +1,30 @@
+@use "../../styles/abstracts/" as v;
+
+.featureItem {
+	height: 17.85rem;
+	width: 21.35rem;
+	padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+	.image {
+		width: 6.25rem;
+		border: 10px solid #00bc77;
+		border-radius: 50%;
+		padding: 1rem;
+        margin: 0;
+	}
+
+	.title {
+        text-align: center;
+        margin: 0;
+	}
+
+	.description {
+        text-align: center;
+        margin: 0;
+	}
+}

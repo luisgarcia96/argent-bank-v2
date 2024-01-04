@@ -1,0 +1,16 @@
+@use "../../styles/abstracts/" as v;
+
+.button {
+    background-color: v.$green-light;
+    width: 100%;
+    padding: 0.5rem;
+    color: v.$white;
+    font-size: 1.1rem;
+    font-weight: v.$fw-bold;
+    border: none;
+    cursor: pointer;
+
+    &:hover {   
+        text-decoration: underline;
+    }
+}
