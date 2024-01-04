@@ -1,0 +1,8 @@
+//Vendors folder
+@use "./vendors/normalize";
+
+//Base folder
+@use "./base/typography";
+
+//Abstracts folder
+@use "./abstracts" as a;

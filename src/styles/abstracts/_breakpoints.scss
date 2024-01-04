@@ -1,0 +1,24 @@
+$breakpoints: (
+	"screen-sm": 768px,
+	"screen-md": 992px,
+	"screen-lg": 1200px,
+);
+
+//Media queries
+@mixin small-screen {
+	@media (max-width: map-get($breakpoints, "screen-sm")) {
+		@content;
+	}
+}
+
+@mixin medium-screen {
+	@media (max-width: map-get($breakpoints, "screen-md")) {
+		@content;
+	}
+}
+
+@mixin large-screen {
+	@media (max-width: map-get($breakpoints, "screen-lg")) {
+		@content;
+	}
+}
