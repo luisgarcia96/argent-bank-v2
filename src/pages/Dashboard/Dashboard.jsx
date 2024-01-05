@@ -1,9 +1,13 @@
+import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
 import AccountPreview from "../../components/AccountPreview/AccountPreview";
 
 import styles from "./Dashboard.module.scss";
 
 const Dashboard = () => {
+	const { token } = useSelector((state) => state.auth);
+
 	const accounts = [
 		{
 			accountTitle: "Argent Bank Checking (x8349)",
@@ -21,6 +25,10 @@ const Dashboard = () => {
 			balanceDescription: "Current Balance",
 		},
 	];
+
+	if (!token) {
+		return <Navigate to="/login" replace/>;
+	}
 
 	return (
 		<div className={styles.dashboard}>

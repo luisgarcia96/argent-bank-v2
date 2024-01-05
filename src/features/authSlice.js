@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { login } from "../api/apiService";
 
 const initialState = {
-	token: null,
+	token: localStorage.getItem("token") || null,
 };
 
 export const loginUser = createAsyncThunk(
@@ -25,9 +25,11 @@ const authSlice = createSlice({
 		setCredentials: (state, action) => {
 			const token = action.payload.body.token;
 			state.token = token;
+			localStorage.setItem("token", token);
 		},
 		logOut: (state) => {
 			state.token = null;
+			localStorage.removeItem("token");
 		},
 	},
 	extraReducers: (builder) => {

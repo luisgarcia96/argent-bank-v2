@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, setCredentials } from "../../features/authSlice";
+import {
+	loginUser,
+	selectCurrentToken,
+	setCredentials,
+} from "../../features/authSlice";
 import Button from "../../components/Button/Button";
 
 import styles from "./Login.module.scss";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
@@ -13,7 +17,7 @@ const Login = () => {
 
 	const navigate = useNavigate();
 
-	const { token } = useSelector((state) => state.auth);
+	const token = useSelector(selectCurrentToken);
 	const dispatch = useDispatch();
 
 	const handleLogin = () => {
@@ -26,12 +30,13 @@ const Login = () => {
 		if (response?.body?.token) {
 			console.log("HERE");
 			dispatch(setCredentials(response.body.token));
-			navigate("/user");
 		}
 	};
 
 	useEffect(() => {
 		if (token) {
+			//Get user data
+
 			navigate("/user");
 		}
 	}, [token, navigate]);
