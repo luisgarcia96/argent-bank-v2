@@ -10,6 +10,7 @@ export const fetchUserInfo = createAsyncThunk(
 	async (token, thunkAPI) => {
 		try {
 			const response = await getUser(token);
+            console.log('AQUI SI', response);
 			return response;
 		} catch (error) {
 			console.log("error", error);
@@ -37,3 +38,5 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
+
+export const selectCurrentUser = (state) => state.user.user;

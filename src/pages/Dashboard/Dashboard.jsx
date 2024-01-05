@@ -1,12 +1,15 @@
-import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import Button from "../../components/Button/Button";
 import AccountPreview from "../../components/AccountPreview/AccountPreview";
 
 import styles from "./Dashboard.module.scss";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "../../features/authSlice";
+import { Navigate } from "react-router-dom";
 
-const Dashboard = () => {
-	const { token } = useSelector((state) => state.auth);
+const Dashboard = ({ user }) => {
+	const token = useSelector(selectCurrentToken);
 
 	const accounts = [
 		{
@@ -26,15 +29,21 @@ const Dashboard = () => {
 		},
 	];
 
-	if (!token) {
-		return <Navigate to="/login" replace/>;
-	}
+	// useEffect(() => {
+	// 	if (!token) {
+	// 		return <Navigate to="/login" />;
+	// 	}
+	// }, [token]);
+
+	useEffect(() => {
+		console.log("Dashboard info", user);
+	}, [user]);
 
 	return (
 		<div className={styles.dashboard}>
 			<div className={styles.dashboard__header}>
 				<h1>
-					Welcome back <br /> Tony Jarvis!
+					Welcome back <br /> {user.firstName} {user.lastName}!
 				</h1>
 				<Button
 					className={styles.editNameBtn}
@@ -57,3 +66,7 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+Dashboard.propTypes = {
+	user: PropTypes.object,
+};

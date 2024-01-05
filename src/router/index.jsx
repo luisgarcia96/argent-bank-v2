@@ -4,18 +4,25 @@ import Login from "../pages/Login/Login";
 import Landing from "../pages/Landing/Landing";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import NotFound from "../pages/NotFound/NotFound";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../features/userSlice";
 
 const AppRouter = () => {
+	const user = useSelector(selectCurrentUser);
 
+	console.log("User in router", user);
 	return (
 		<Routes>
 			<Route path="/" element={<Landing />} />
 			<Route path="/login" element={<Login />} />
-			<Route path="/user" element={
-				<ProtectedRoute user={'Luis'}>
-					<Dashboard />
-				</ProtectedRoute>
-			} />
+			<Route
+				path="/user"
+				element={
+					<ProtectedRoute user={user}>
+						<Dashboard user={user} />
+					</ProtectedRoute>
+				}
+			/>
 			<Route path="*" element={<NotFound />} />
 		</Routes>
 	);
