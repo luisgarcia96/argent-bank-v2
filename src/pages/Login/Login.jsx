@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	loginUser,
-	selectCurrentToken,
-	setCredentials,
-} from "../../features/authSlice";
+import { loginUser, selectCurrentToken } from "../../features/authSlice";
+import { fetchUserInfo } from "../../features/userSlice";
 import Button from "../../components/Button/Button";
 
 import styles from "./Login.module.scss";
-import { fetchUserInfo } from "../../features/userSlice";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
@@ -26,22 +22,12 @@ const Login = () => {
 			email,
 			password,
 		};
-		const response = dispatch(loginUser(userCredentials));
-
-		if (response?.body?.token) { //TODO Ask if this is redundant. Is it done already in the slice?
-			console.log("HERE");
-			dispatch(setCredentials(response.body.token));
-		}
+		dispatch(loginUser(userCredentials));
 	};
 
 	useEffect(() => {
 		if (token) {
-			//Get user data
-			const response = dispatch(fetchUserInfo(token));
-			if (response?.body) { //TODO Ask if this is redundant too. Is it done already in the slice?
-				console.log("YESSS", response.body);
-			}
-
+			dispatch(fetchUserInfo(token));
 			navigate("/user");
 		}
 	}, [token, navigate, dispatch]);

@@ -1,15 +1,18 @@
-import PropTypes from "prop-types";
 import Button from "../../components/Button/Button";
 import AccountPreview from "../../components/AccountPreview/AccountPreview";
+import { useSelector } from "react-redux";
+import {
+	selectCurrentUser,
+	selectIsLoading,
+	selectError,
+} from "../../features/userSlice";
 
 import styles from "./Dashboard.module.scss";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { selectCurrentToken } from "../../features/authSlice";
-import { Navigate } from "react-router-dom";
 
-const Dashboard = ({ user }) => {
-	const token = useSelector(selectCurrentToken);
+const Dashboard = () => {
+	const isLoading = useSelector(selectIsLoading);
+	const error = useSelector(selectError);
+	const userInfo = useSelector(selectCurrentUser);
 
 	const accounts = [
 		{
@@ -29,21 +32,19 @@ const Dashboard = ({ user }) => {
 		},
 	];
 
-	// useEffect(() => {
-	// 	if (!token) {
-	// 		return <Navigate to="/login" />;
-	// 	}
-	// }, [token]);
+	if (isLoading) {
+		return <h1>Loading...</h1>;
+	}
 
-	useEffect(() => {
-		console.log("Dashboard info", user);
-	}, [user]);
+	if (error) {
+		return <h1>There has been an error. Please, try again later</h1>;
+	}
 
 	return (
 		<div className={styles.dashboard}>
 			<div className={styles.dashboard__header}>
 				<h1>
-					Welcome back <br /> {user.firstName} {user.lastName}!
+					Welcome back <br /> {userInfo.firstName} {userInfo.lastName}!
 				</h1>
 				<Button
 					className={styles.editNameBtn}
@@ -66,7 +67,3 @@ const Dashboard = ({ user }) => {
 };
 
 export default Dashboard;
-
-Dashboard.propTypes = {
-	user: PropTypes.object,
-};
