@@ -4,10 +4,12 @@ import { logOut } from "../../features/authSlice";
 import Logo from "../../assets/img/argentBankLogo.png";
 
 import styles from "./Header.module.scss";
+import { selectCurrentUser } from "../../features/userSlice";
 
 const Header = () => {
 	const navigate = useNavigate();
 	const { token } = useSelector((state) => state.auth);
+	const user = useSelector(selectCurrentUser);
 	const dispatch = useDispatch();
 
 	//Handle Logout
@@ -24,7 +26,7 @@ const Header = () => {
 
 			<div className={styles.header__signIn}>
 				<i className="fa-solid fa-circle-user"></i>
-				{token && <Link to="/user">My Account</Link>}
+				{token && <Link to="/user">{user.firstName}</Link>}
 				{token && <span onClick={handleLogout}>Sign Out</span>}
 				{!token && <Link to="/login">Sign In</Link>}
 			</div>
