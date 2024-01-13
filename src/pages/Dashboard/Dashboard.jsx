@@ -1,5 +1,6 @@
 import Button from "../../components/Button/Button";
 import AccountPreview from "../../components/AccountPreview/AccountPreview";
+import { mockedAccounts } from "../../mock/accounts-mock";
 import { useSelector } from "react-redux";
 import {
 	selectCurrentUser,
@@ -13,24 +14,6 @@ const Dashboard = () => {
 	const isLoading = useSelector(selectIsLoading);
 	const error = useSelector(selectError);
 	const userInfo = useSelector(selectCurrentUser);
-
-	const accounts = [
-		{
-			accountTitle: "Argent Bank Checking (x8349)",
-			balance: 2082.79,
-			balanceDescription: "Available Balance",
-		},
-		{
-			accountTitle: "Argent Bank Savings (x6712)",
-			balance: 10928.42,
-			balanceDescription: "Available Balance",
-		},
-		{
-			accountTitle: "Argent Bank Credit Card (x8349)",
-			balance: 184.3,
-			balanceDescription: "Current Balance",
-		},
-	];
 
 	if (isLoading) {
 		return <h1>Loading...</h1>;
@@ -53,7 +36,7 @@ const Dashboard = () => {
 				/>
 			</div>
 			<div className={styles.dashboard__accounts}>
-				{accounts.map((account, index) => (
+				{mockedAccounts.map((account, index) => (
 					<AccountPreview
 						key={index}
 						accountTitle={account.accountTitle}
