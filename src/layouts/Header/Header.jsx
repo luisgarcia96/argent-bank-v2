@@ -10,6 +10,9 @@ const Header = () => {
 	const navigate = useNavigate();
 	const { token } = useSelector((state) => state.auth);
 	const user = useSelector(selectCurrentUser);
+
+	const firstName = user?.firstName || "My Account";
+
 	const dispatch = useDispatch();
 
 	//Handle Logout
@@ -26,7 +29,7 @@ const Header = () => {
 
 			<div className={styles.header__signIn}>
 				<i className="fa-solid fa-circle-user"></i>
-				{token && <Link to="/user">{user.firstName}</Link>}
+				{token && <Link to="/user">{firstName}</Link>}
 				{token && <span onClick={handleLogout}>Sign Out</span>}
 				{!token && <Link to="/login">Sign In</Link>}
 			</div>
