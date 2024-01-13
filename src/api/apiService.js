@@ -54,4 +54,23 @@ const getUser = async (token) => {
 	}
 };
 
-export { login, signup, getUser };
+const editUserName = async (token, data) => {
+	try {
+		const response = await fetch(`${API_URL}/user/profile`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify(data),
+		});
+		if (response.status !== 200) {
+			throw new Error("User not found.");
+		}
+		return await response.json();
+	} catch (error) {
+		throw new Error("User not found.");
+	}
+};
+
+export { login, signup, getUser, editUserName };

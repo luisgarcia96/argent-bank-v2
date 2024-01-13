@@ -32,6 +32,29 @@
             }
         }
 
+        .editNameInputs {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+
+            .editNameInput {
+                height: 2rem;
+            }
+        }
+
+        .editNameActions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+
+            .editNameSave,
+            .editNameCancel {
+                width: 5rem;
+            }
+        }
+
         .editNameBtn {
             width: fit-content;
         }
